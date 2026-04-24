@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainGPT Labs — Backing Tomorrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-grid-bg"></div>
+    <div class="preloader-center">
+      <div class="preloader-logo-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="28" stroke="#FF4500" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/>
+          <circle cx="32" cy="32" r="16" stroke="#FF4500" stroke-width="1" fill="none"/>
+          <circle cx="32" cy="32" r="6" fill="#FF4500"/>
+          <line x1="32" y1="4"  x2="32" y2="60" stroke="#FF4500" stroke-width="0.5" opacity="0.4"/>
+          <line x1="4"  y1="32" x2="60" y2="32" stroke="#FF4500" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="preloader-label">INITIALIZING</div>
+      <div class="preloader-bar-track"><div id="preloader-bar"></div></div>
+      <div id="preloader-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+
+  <!-- BLUEPRINT GRID OVERLAY -->
+  <div class="blueprint-overlay" aria-hidden="true"></div>
+
+  <!-- NOISE GRAIN -->
+  <div class="noise-grain" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════
+       HEADER
+  ═══════════════════════════════ -->
+  <header id="site-header">
+    <div class="header-inner">
+      <a href="#" class="header-logo">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="14" stroke="#FF4500" stroke-width="1.5" fill="none"/>
+          <circle cx="18" cy="18" r="5" fill="#FF4500"/>
+          <line x1="18" y1="4"  x2="18" y2="32" stroke="#FF4500" stroke-width="1" opacity="0.5"/>
+          <line x1="4"  y1="18" x2="32" y2="18" stroke="#FF4500" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <span class="logo-wordmark">ChainGPT <em>Labs</em></span>
+      </a>
+
+      <nav class="header-nav" id="header-nav">
+        <a href="#programs" class="nav-link mag" data-mag>Our Programs<span class="link-bar"></span></a>
+        <a href="#portfolio" class="nav-link mag" data-mag>Portfolio<span class="link-bar"></span></a>
+        <a href="#team"      class="nav-link mag" data-mag>Team<span class="link-bar"></span></a>
+        <a href="#faq"       class="nav-link mag" data-mag>FAQ<span class="link-bar"></span></a>
+        <a href="#news"      class="nav-link mag" data-mag>News<span class="link-bar"></span></a>
+      </nav>
+
+      <a href="#apply" class="header-apply-btn mag" data-mag>Apply Now</a>
+
+      <button class="burger" id="burger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mega menu for "Our Programs" -->
+    <div class="mega-menu" id="mega-menu" aria-hidden="true">
+      <div class="mega-inner">
+        <div class="mega-col">
+          <p class="mega-label">Programs</p>
+          <a href="#incubation" class="mega-item">Incubation Program</a>
+          <a href="#investment"  class="mega-item">Investment Track</a>
+          <a href="#advisory"    class="mega-item">Advisory Services</a>
+          <a href="#grants"      class="mega-item">Ecosystem Grants</a>
+        </div>
+        <div class="mega-col">
+          <p class="mega-label">Resources</p>
+          <a href="#portfolio" class="mega-item">Portfolio Companies</a>
+          <a href="#partners"  class="mega-item">Partner Network</a>
+          <a href="#news"      class="mega-item">Media &amp; Press</a>
+          <a href="#faq"       class="mega-item">FAQ</a>
+        </div>
+        <div class="mega-col mega-cta-col">
+          <p class="mega-label">Get Started</p>
+          <p class="mega-body">Join the next generation of Web3 innovation.</p>
+          <a href="#apply" class="mega-apply-btn">Apply for Incubation →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <a href="#programs" class="mob-link">Our Programs</a>
+      <a href="#portfolio" class="mob-link">Portfolio</a>
+      <a href="#team"      class="mob-link">Team</a>
+      <a href="#faq"       class="mob-link">FAQ</a>
+      <a href="#news"      class="mob-link">News</a>
+      <a href="#apply"     class="mob-apply">Apply Now →</a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════
+       HERO
+  ═══════════════════════════════ -->
+  <section id="hero">
+    <!-- Parallax bg text -->
+    <div class="hero-bg-text" id="hero-bg-text" aria-hidden="true">BACKING TOMORROW</div>
+
+    <!-- Three.js canvas -->
+    <div id="robot-wrap">
+      <canvas id="robot-canvas"></canvas>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        Web3 Incubation &amp; Investment
+      </div>
+      <h1 class="hero-h1">
+        <span class="h1-line" data-text="BACKING">BACKING</span>
+        <span class="h1-line h1-accent" data-text="TOMORROW">TOMORROW</span>
+      </h1>
+      <p class="hero-tagline">
+        Empowering the next generation of Web3 builders<br>
+        through capital, mentorship, and ecosystem access.
+      </p>
+      <div class="hero-btns">
+        <a href="#apply"     class="btn-primary mag" data-mag>Apply for Incubation</a>
+        <a href="#portfolio" class="btn-ghost  mag"  data-mag>View Portfolio</a>
+      </div>
+    </div>
+
+    <div class="hero-stats-bar">
+      <div class="hs"><span class="hs-n" data-count="180">0</span><sup>+</sup><span class="hs-l">Projects Backed</span></div>
+      <div class="hs-divider"></div>
+      <div class="hs"><span class="hs-n" data-count="50">0</span><sup>M+</sup><span class="hs-l">Capital Deployed</span></div>
+      <div class="hs-divider"></div>
+      <div class="hs"><span class="hs-n" data-count="40">0</span><sup>+</sup><span class="hs-l">Partner Networks</span></div>
+    </div>
+
+    <div class="hero-scroll-cue">
+      <span>Scroll</span>
+      <svg width="14" height="22" viewBox="0 0 14 22"><path d="M7 0v18M1 12l6 6 6-6" stroke="#FF4500" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       MARQUEE STRIP
+  ═══════════════════════════════ -->
+  <div class="marquee-strip" id="marquee-strip">
+    <div class="mq-track" id="mq-track">
+      <span>BACKING TOMORROW</span><span class="mq-dot">◆</span>
+      <span>WEB3 INCUBATION</span><span class="mq-dot">◆</span>
+      <span>INNOVATION LAB</span><span class="mq-dot">◆</span>
+      <span>DEFI ECOSYSTEM</span><span class="mq-dot">◆</span>
+      <span>BACKING TOMORROW</span><span class="mq-dot">◆</span>
+      <span>WEB3 INCUBATION</span><span class="mq-dot">◆</span>
+      <span>INNOVATION LAB</span><span class="mq-dot">◆</span>
+      <span>DEFI ECOSYSTEM</span><span class="mq-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PROGRAMS — BEYOND CAPITAL
+  ═══════════════════════════════ -->
+  <section id="programs" class="sec-programs">
+    <!-- Vertical sidebar label -->
+    <div class="sidebar-vert" aria-hidden="true">BEYOND CAPITAL</div>
+
+    <div class="programs-body">
+      <header class="sec-header">
+        <span class="sec-tag">Our Programs</span>
+        <h2 class="sec-h2">More Than <em>Investment</em></h2>
+        <p class="sec-sub">We provide the full stack of resources your project needs to dominate the Web3 ecosystem.</p>
+      </header>
+
+      <div class="programs-grid" id="programs-grid">
+        <!-- Card 01 -->
+        <article class="prog-card prog-large" data-step="01">
+          <div class="prog-step">01</div>
+          <div class="prog-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <rect x="3" y="3" width="30" height="30" rx="6" stroke="#FF4500" stroke-width="1.2"/>
+              <circle cx="18" cy="18" r="8" stroke="#FF4500" stroke-width="1.2"/>
+              <circle cx="18" cy="18" r="3" fill="#FF4500"/>
+            </svg>
+          </div>
+          <h3>Incubation Program</h3>
+          <p>Full-spectrum support from concept to launch. Technical mentorship, tokenomics, community building, market strategy.</p>
+          <ul class="prog-list">
+            <li>Smart contract auditing</li>
+            <li>Token launch strategy</li>
+            <li>Exchange listings support</li>
+            <li>Marketing &amp; PR campaigns</li>
+          </ul>
+          <a href="#apply" class="prog-link mag" data-mag>Learn More →</a>
+        </article>
+
+        <!-- Card 02 -->
+        <article class="prog-card prog-medium" data-step="02">
+          <div class="prog-step">02</div>
+          <div class="prog-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <path d="M6 30L14 18l8 6 8-12" stroke="#FF4500" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <circle cx="30" cy="10" r="4" stroke="#FF4500" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <h3>Investment Track</h3>
+          <p>Strategic capital deployment for early-stage Web3 projects with long-term ecosystem vision.</p>
+          <ul class="prog-list">
+            <li>Seed &amp; Series A rounds</li>
+            <li>Strategic partnerships</li>
+            <li>Portfolio network access</li>
+          </ul>
+          <a href="#apply" class="prog-link mag" data-mag>Learn More →</a>
+        </article>
+
+        <!-- Card 03 -->
+        <article class="prog-card prog-small" data-step="03">
+          <div class="prog-step">03</div>
+          <div class="prog-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <path d="M18 6C10.3 6 4 12.3 4 20s6.3 14 14 14 14-6.3 14-14" stroke="#FF4500" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M26 6l4 4-4 4" stroke="#FF4500" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Advisory Services</h3>
+          <p>Expert guidance from industry veterans with proven track records in Web3.</p>
+          <a href="#apply" class="prog-link mag" data-mag>Learn More →</a>
+        </article>
+      </div>
+
+      <!-- Step indicator sidebar -->
+      <div class="step-indicator-wrap" id="step-indicator">
+        <div class="step-dot active" data-s="0">01</div>
+        <div class="step-dot"        data-s="1">02</div>
+        <div class="step-dot"        data-s="2">03</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       PORTFOLIO BENTO GRID
+  ═══════════════════════════════ -->
+  <section id="portfolio" class="sec-portfolio">
+    <header class="sec-header centered">
+      <span class="sec-tag">Portfolio</span>
+      <h2 class="sec-h2">Backed <em>Projects</em></h2>
+      <div class="tab-row">
+        <button class="tab active" data-tab="incubation">Incubation</button>
+        <button class="tab"        data-tab="investment">Investment</button>
+      </div>
+    </header>
+
+    <div class="bento-grid" id="bento-grid">
+
+      <div class="bc bc-featured" data-cat="incubation" data-order="1">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#FF4500,#FF8C00)"><span class="bc-initial">DX</span></div>
+        <div class="bc-body">
+          <h4>DeFi Exchange Pro</h4>
+          <div class="bc-metrics">
+            <div class="bc-m"><b>$12M</b><span>Raised</span></div>
+            <div class="bc-m"><b>847%</b><span>ATH ROI</span></div>
+          </div>
+          <div class="bc-tags"><span>DeFi</span><span>DEX</span></div>
+        </div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View Project →</a></div>
+      </div>
+
+      <div class="bc bc-metrics-card" data-cat="incubation" data-order="2">
+        <div class="bc-big-num">180<sup>+</sup></div>
+        <div class="bc-big-lbl">Projects Backed</div>
+        <div class="bc-mini-grid">
+          <div><b>$50M+</b><span>Deployed</span></div>
+          <div><b>40+</b><span>Partners</span></div>
+        </div>
+      </div>
+
+      <div class="bc bc-proj" data-cat="incubation" data-order="3">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)"><span class="bc-initial">NF</span></div>
+        <div class="bc-body"><h4>NFT Forge</h4><div class="bc-tags"><span>NFT</span><span>Layer 2</span></div></div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View →</a></div>
+      </div>
+
+      <div class="bc bc-proj" data-cat="investment" data-order="4">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#0EA5E9,#06B6D4)"><span class="bc-initial">LP</span></div>
+        <div class="bc-body"><h4>LiquidProtocol</h4><div class="bc-tags"><span>DeFi</span><span>Yield</span></div></div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View →</a></div>
+      </div>
+
+      <div class="bc bc-featured-alt" data-cat="investment" data-order="5">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#10B981,#059669)"><span class="bc-initial">ZK</span></div>
+        <div class="bc-body">
+          <h4>ZeroKnowledge Finance</h4>
+          <div class="bc-metrics">
+            <div class="bc-m"><b>$8M</b><span>Raised</span></div>
+            <div class="bc-m"><b>320%</b><span>ATH ROI</span></div>
+          </div>
+          <div class="bc-tags"><span>ZK-Proofs</span><span>Privacy</span></div>
+        </div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View Project →</a></div>
+      </div>
+
+      <div class="bc bc-proj" data-cat="incubation" data-order="6">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#F59E0B,#EF4444)"><span class="bc-initial">AI</span></div>
+        <div class="bc-body"><h4>AI Protocol</h4><div class="bc-tags"><span>AI</span><span>Infra</span></div></div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View →</a></div>
+      </div>
+
+      <div class="bc bc-proj" data-cat="investment" data-order="7">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)"><span class="bc-initial">GM</span></div>
+        <div class="bc-body"><h4>GameMeta</h4><div class="bc-tags"><span>Gaming</span><span>Metaverse</span></div></div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View →</a></div>
+      </div>
+
+      <div class="bc bc-proj" data-cat="incubation" data-order="8">
+        <div class="bc-bg" style="background:linear-gradient(135deg,#14B8A6,#0D9488)"><span class="bc-initial">CB</span></div>
+        <div class="bc-body"><h4>ChainBridge</h4><div class="bc-tags"><span>Cross-chain</span><span>Bridge</span></div></div>
+        <div class="bc-hover"><a href="#" class="bc-cta mag" data-mag>View →</a></div>
+      </div>
+
+      <div class="bc bc-apply-cta" data-cat="incubation" data-order="9">
+        <h4>Your Project Here?</h4>
+        <p>Apply for our incubation program.</p>
+        <a href="#apply" class="btn-primary-sm mag" data-mag>Apply Now</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       PARTNER MARQUEE
+  ═══════════════════════════════ -->
+  <div class="partner-strip">
+    <div class="partner-strip-inner">
+      <span class="partner-eyebrow">Backed by the best ecosystems</span>
+      <div class="partner-mq-wrap">
+        <div class="partner-mq-track" id="partner-track">
+          <div class="partner-logo mag" data-mag>Chainlink</div>
+          <div class="partner-logo mag" data-mag>TRON</div>
+          <div class="partner-logo mag" data-mag>BNB Chain</div>
+          <div class="partner-logo mag" data-mag>OKX</div>
+          <div class="partner-logo mag" data-mag>Polygon</div>
+          <div class="partner-logo mag" data-mag>Avalanche</div>
+          <div class="partner-logo mag" data-mag>Arbitrum</div>
+          <div class="partner-logo mag" data-mag>Optimism</div>
+          <div class="partner-logo mag" data-mag>Chainlink</div>
+          <div class="partner-logo mag" data-mag>TRON</div>
+          <div class="partner-logo mag" data-mag>BNB Chain</div>
+          <div class="partner-logo mag" data-mag>OKX</div>
+          <div class="partner-logo mag" data-mag>Polygon</div>
+          <div class="partner-logo mag" data-mag>Avalanche</div>
+          <div class="partner-logo mag" data-mag>Arbitrum</div>
+          <div class="partner-logo mag" data-mag>Optimism</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       TEAM
+  ═══════════════════════════════ -->
+  <section id="team" class="sec-team">
+    <header class="sec-header">
+      <span class="sec-tag">The Team</span>
+      <h2 class="sec-h2">Built by <em>Builders</em></h2>
+      <p class="sec-sub">Industry veterans with decades of experience in blockchain, venture capital, and technology.</p>
+    </header>
+
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="tc-front">
+          <div class="tc-portrait">
+            <div class="tc-avatar" style="--hue:220">AC</div>
+            <div class="tc-scan-line"></div>
+          </div>
+          <div class="tc-name-wrap">
+            <h4>Alex Chen</h4>
+            <span class="tc-role">Managing Partner</span>
+          </div>
+        </div>
+        <div class="tc-back">
+          <div class="hud-corners"><i></i><i></i><i></i><i></i></div>
+          <div class="tc-bio">
+            <h4>Alex Chen</h4>
+            <span class="hud-tag">// EXPERTISE</span>
+            <p>DeFi Architecture, Token Economics, Exchange Listings. 12 years in crypto.</p>
+            <span class="hud-tag">// SOCIALS</span>
+            <div class="tc-socials"><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="tc-front">
+          <div class="tc-portrait">
+            <div class="tc-avatar" style="--hue:280">SK</div>
+            <div class="tc-scan-line"></div>
+          </div>
+          <div class="tc-name-wrap">
+            <h4>Sarah Kim</h4>
+            <span class="tc-role">Head of Investments</span>
+          </div>
+        </div>
+        <div class="tc-back">
+          <div class="hud-corners"><i></i><i></i><i></i><i></i></div>
+          <div class="tc-bio">
+            <h4>Sarah Kim</h4>
+            <span class="hud-tag">// EXPERTISE</span>
+            <p>VC Strategy, Portfolio Management, Web3 Tokenomics. 8 years experience.</p>
+            <span class="hud-tag">// SOCIALS</span>
+            <div class="tc-socials"><a href="#">Twitter</a><a href="#">LinkedIn</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="tc-front">
+          <div class="tc-portrait">
+            <div class="tc-avatar" style="--hue:160">MR</div>
+            <div class="tc-scan-line"></div>
+          </div>
+          <div class="tc-name-wrap">
+            <h4>Marcus Rivera</h4>
+            <span class="tc-role">Technical Director</span>
+          </div>
+        </div>
+        <div class="tc-back">
+          <div class="hud-corners"><i></i><i></i><i></i><i></i></div>
+          <div class="tc-bio">
+            <h4>Marcus Rivera</h4>
+            <span class="hud-tag">// EXPERTISE</span>
+            <p>Smart Contracts, ZK-Proofs, Protocol Design. 10 years blockchain dev.</p>
+            <span class="hud-tag">// SOCIALS</span>
+            <div class="tc-socials"><a href="#">GitHub</a><a href="#">Twitter</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="tc-front">
+          <div class="tc-portrait">
+            <div class="tc-avatar" style="--hue:30">YT</div>
+            <div class="tc-scan-line"></div>
+          </div>
+          <div class="tc-name-wrap">
+            <h4>Yuki Tanaka</h4>
+            <span class="tc-role">Growth Lead</span>
+          </div>
+        </div>
+        <div class="tc-back">
+          <div class="hud-corners"><i></i><i></i><i></i><i></i></div>
+          <div class="tc-bio">
+            <h4>Yuki Tanaka</h4>
+            <span class="hud-tag">// EXPERTISE</span>
+            <p>Community Building, Token Launch Marketing, Growth. 6 years Web3.</p>
+            <span class="hud-tag">// SOCIALS</span>
+            <div class="tc-socials"><a href="#">Twitter</a><a href="#">Discord</a></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════ -->
+  <section class="sec-testimonials">
+    <header class="sec-header centered">
+      <span class="sec-tag">Testimonials</span>
+      <h2 class="sec-h2">Founders <em>Trust Us</em></h2>
+    </header>
+    <div class="testi-slider-wrap">
+      <div class="testi-track" id="testi-track">
+        <div class="testi-card">
+          <div class="tq-mark">"</div>
+          <p class="tq-text">ChainGPT Labs didn't just invest capital — they gave us the network, mentorship, and strategic clarity that took us from whitepaper to mainnet in 8 months.</p>
+          <div class="tq-author">
+            <div class="tq-avatar">JL</div>
+            <div><strong>James Liu</strong><span>CEO, DeFi Exchange Pro</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="tq-mark">"</div>
+          <p class="tq-text">The incubation program gave us access to exchanges, auditors, and marketing channels we couldn't have reached alone. Our TGE was a massive success.</p>
+          <div class="tq-author">
+            <div class="tq-avatar">MP</div>
+            <div><strong>Maria Petrov</strong><span>Founder, NFT Forge</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="tq-mark">"</div>
+          <p class="tq-text">What sets ChainGPT Labs apart is their deep technical understanding. They helped us redesign our tokenomics from the ground up.</p>
+          <div class="tq-author">
+            <div class="tq-avatar">DK</div>
+            <div><strong>David Kim</strong><span>CTO, ZeroKnowledge Finance</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="tq-mark">"</div>
+          <p class="tq-text">From audit to listing, the full-stack support model is unmatched. ChainGPT Labs is the partner every early-stage team needs.</p>
+          <div class="tq-author">
+            <div class="tq-avatar">LW</div>
+            <div><strong>Lisa Wang</strong><span>Founder, ChainBridge</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-controls">
+        <button id="testi-prev" class="testi-btn" aria-label="Prev">←</button>
+        <div id="testi-dots" class="testi-dots"></div>
+        <button id="testi-next" class="testi-btn" aria-label="Next">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       FAQ
+  ═══════════════════════════════ -->
+  <section id="faq" class="sec-faq">
+    <div class="faq-vert-label" aria-hidden="true">F A Q</div>
+    <div class="faq-body">
+      <header class="sec-header">
+        <span class="sec-tag">FAQ</span>
+        <h2 class="sec-h2">Common <em>Questions</em></h2>
+      </header>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What stage of projects do you incubate?</span>
+            <span class="faq-ico"><b></b><b></b></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>We primarily work with pre-seed to seed-stage projects that have a working concept or MVP. Ideally, the founding team has at least 2 members with complementary technical and business skills. We consider projects across all Web3 verticals including DeFi, NFTs, GameFi, Infrastructure, and AI.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>How long is the incubation program?</span>
+            <span class="faq-ico"><b></b><b></b></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>Our standard incubation program runs for 6 months, covering everything from technical development and smart contract auditing to community building and exchange listing negotiations. We offer a 3-month accelerator track for more advanced projects closer to launch.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What does ChainGPT Labs receive in return?</span>
+            <span class="faq-ico"><b></b><b></b></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>We typically receive an equity stake of 3–8% depending on the stage and scope of support, plus token allocation in projects that have a token component. Our goal is to align incentives for long-term success rather than short-term extraction.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Do you invest in projects outside your incubation program?</span>
+            <span class="faq-ico"><b></b><b></b></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>Yes! Our Investment Track is separate from incubation. We invest in later-stage projects (Series A and beyond) that don't need full incubation support but would benefit from strategic capital, our network, and the ChainGPT brand association.</p></div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>How do I apply for the program?</span>
+            <span class="faq-ico"><b></b><b></b></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p>Submit your application through our Apply form. Include your pitch deck, whitepaper (if available), team bios, and a brief description of your project. We review all applications within 2 weeks and reach out to shortlisted teams for a discovery call.</p></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       NEWS & MEDIA
+  ═══════════════════════════════ -->
+  <section id="news" class="sec-news">
+    <!-- Vertical floating logo -->
+    <div class="news-vert-logo" aria-hidden="true" id="news-vert">CHAINGPT LABS</div>
+
+    <header class="sec-header">
+      <span class="sec-tag">News &amp; Media</span>
+      <h2 class="sec-h2">Latest <em>Updates</em></h2>
+    </header>
+
+    <div class="news-grid">
+
+      <article class="news-card news-featured">
+        <div class="news-thumb">
+          <div class="news-thumb-img" style="background:linear-gradient(135deg,#0f0f0f,#1c1c1c)">
+            <div class="thumb-dots"></div>
+            <span class="thumb-badge">Featured</span>
+          </div>
+        </div>
+        <div class="news-body">
+          <span class="news-cat">Press Release</span>
+          <h3 class="news-title">ChainGPT Labs Closes $50M Fund II for Web3 Infrastructure</h3>
+          <p class="news-excerpt">The new fund will focus on ZK infrastructure, AI-blockchain convergence, and cross-chain protocols across emerging markets.</p>
+          <div class="news-foot">
+            <span class="news-date">April 10, 2026</span>
+            <a href="#" class="news-more mag" data-mag>Read More →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb"><div class="news-thumb-img" style="background:linear-gradient(135deg,#111,#1f1f1f)"><div class="thumb-dots"></div></div></div>
+        <div class="news-body">
+          <span class="news-cat">Portfolio Update</span>
+          <h3 class="news-title">DeFi Exchange Pro Hits $1B Trading Volume</h3>
+          <div class="news-foot"><span class="news-date">April 5, 2026</span><a href="#" class="news-more mag" data-mag>Read More →</a></div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb"><div class="news-thumb-img" style="background:linear-gradient(135deg,#111,#1f1f1f)"><div class="thumb-dots"></div></div></div>
+        <div class="news-body">
+          <span class="news-cat">Ecosystem</span>
+          <h3 class="news-title">New Cohort: 12 Projects Join Spring 2026 Incubation</h3>
+          <div class="news-foot"><span class="news-date">March 28, 2026</span><a href="#" class="news-more mag" data-mag>Read More →</a></div>
+        </div>
+      </article>
+
+      <article class="news-card">
+        <div class="news-thumb"><div class="news-thumb-img" style="background:linear-gradient(135deg,#111,#1f1f1f)"><div class="thumb-dots"></div></div></div>
+        <div class="news-body">
+          <span class="news-cat">Research</span>
+          <h3 class="news-title">State of Web3 VC: Q1 2026 Report Now Available</h3>
+          <div class="news-foot"><span class="news-date">March 15, 2026</span><a href="#" class="news-more mag" data-mag>Read More →</a></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       APPLY CTA
+  ═══════════════════════════════ -->
+  <section id="apply" class="sec-apply">
+    <div class="apply-grid-lines" aria-hidden="true"></div>
+    <div class="apply-inner">
+      <span class="sec-tag">Get Started</span>
+      <h2 class="apply-h2">Ready to Build the <em>Future?</em></h2>
+      <p class="apply-sub">Submit your application and join the ecosystem of tomorrow's most impactful Web3 projects.</p>
+      <div class="apply-btns">
+        <a href="#" class="btn-apply mag" data-mag id="apply-main-btn">Apply Now</a>
+        <a href="#" class="btn-ghost-lg mag" data-mag>Schedule a Call</a>
+      </div>
+      <div class="apply-meta">
+        <div><b>2 weeks</b><span>Review time</span></div>
+        <div><b>100%</b><span>Confidential</span></div>
+        <div><b>Free</b><span>To apply</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-rule"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo-link">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="14" stroke="#FF4500" stroke-width="1.5" fill="none"/>
+            <circle cx="18" cy="18" r="5" fill="#FF4500"/>
+          </svg>
+          <span>ChainGPT Labs</span>
+        </a>
+        <p>Backing tomorrow's most impactful Web3 projects through capital, mentorship, and ecosystem access.</p>
+        <div class="footer-socials">
+          <a href="#" class="fsoc mag" data-mag>Twitter</a>
+          <a href="#" class="fsoc mag" data-mag>Telegram</a>
+          <a href="#" class="fsoc mag" data-mag>Discord</a>
+          <a href="#" class="fsoc mag" data-mag>LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="fcol">
+          <span class="fcol-title">Programs</span>
+          <a href="#programs" class="flink mag" data-mag>Incubation</a>
+          <a href="#programs" class="flink mag" data-mag>Investment</a>
+          <a href="#programs" class="flink mag" data-mag>Advisory</a>
+        </div>
+        <div class="fcol">
+          <span class="fcol-title">Company</span>
+          <a href="#team"      class="flink mag" data-mag>Team</a>
+          <a href="#portfolio" class="flink mag" data-mag>Portfolio</a>
+          <a href="#news"      class="flink mag" data-mag>News</a>
+        </div>
+        <div class="fcol">
+          <span class="fcol-title">Legal</span>
+          <a href="#" class="flink mag" data-mag>Privacy Policy</a>
+          <a href="#" class="flink mag" data-mag>Terms of Service</a>
+          <a href="#faq" class="flink mag" data-mag>FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ChainGPT Labs. All rights reserved.</span>
+      <span class="footer-tagline">BACKING TOMORROW</span>
+    </div>
+  </footer>
+
+  <!-- CDN Scripts — order matters -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Draggable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/Flip.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
